@@ -1,13 +1,17 @@
+let computerScore = 0;
+let humanScore = 0;
+
 function getComputerChoice () {
-    let randomNumber = Math.floor(Math.random() * 3);
-    if (randomNumber === 0) {
-        return 'rock';
-    } else if (randomNumber === 1) {
-        return 'paper';
+    let num = Math.floor(Math.random() * 3);
+    if (num === 0) {
+        return 'Rock';
+    } else if (num === 1) {
+        return 'Paper';
     } else {
-        return 'scissors';
+        return 'Scissors';
     }
 }
+
 
 function getHumanChoice () {
     let humanAnswer = '';
@@ -25,4 +29,28 @@ function getHumanChoice () {
     return humanAnswer.charAt(0).toUpperCase() + humanAnswer.slice(1).toLowerCase();
 }
 
+function playRound (humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        alert ('Its a tie!');
+        return 'Its a tie!';
+    } else if (humanChoice === 'Rock' && computerChoice === 'Scissors' || humanChoice === 'Paper' && computerChoice === 'Rock' || humanChoice === 'Scissors' && computerChoice === 'Paper') {
+        humanScore++;
+        alert ('You win!');
+        return 'You win!';
+    } else {
+        computerScore++;
+        alert ('You lose!');
+        return 'You lose!';
+    }
+}
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+let round = playRound(humanSelection, computerSelection);
+
+if (round === null) {
+    console.log('Game cancelled by the user.');
+} else {
+    console.log(round);
+}
 
